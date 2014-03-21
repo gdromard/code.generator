@@ -1,0 +1,13 @@
+
+	public ${attributeType} get${Attribute}() {
+		return ${attribute};
+	}
+
+	public void set${Attribute}(${attributeType} ${attribute}) {
+		this.${attribute} = ${attribute};
+	}
+
+	public void set${Attribute}(String ${attribute}) {
+		if (${attribute} != null && ${attribute}.trim().length()>0) 
+			this.${attribute} = new Date(Long.parseLong(${attribute}));
+	}
