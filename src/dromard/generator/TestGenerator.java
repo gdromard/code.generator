@@ -39,16 +39,8 @@ public class TestGenerator extends AbstractGenerator {
 		logStep("Construction des Objets");
 
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("packageName", "test.generated");
-		params.put("packagePath", "test.generated".replaceAll("\\.", "/"));
-		params.put("project", "TestGenerated");
-		params.put("Project", capitalize("TestGenerated"));
-		params.put("projectPath", GENERATION_PATH);
-		
-		params.put("message.error.invalidField", "n'est pas une valeur valide !");
-		params.put("message.error.mandatoryField", "Ce champs est obligatoire !");
 
-
+		// construction des variables de generation sous forme d'objet
 		List<TestObject> beans = new ArrayList<TestObject>();
 		beans.add(
 			new TestObject()
@@ -67,24 +59,6 @@ public class TestGenerator extends AbstractGenerator {
 			.addAttribute(new TestAttribute().setAttribute("codePostal").setType("String"))
 			.addAttribute(new TestAttribute().setAttribute("ville").setType("String"))
 		);
-		
-		params.put("beans", beans);
-		params.put("beansHandler", new ParamHandler<TestObject>() {
-			@Override
-			public void handle(TestObject bean, Map<String, Object> params) {
-				params.put("object", bean.getObject());
-				params.put("Object", capitalize(bean.getObject()));
-				params.put("getters", bean.getProperties());
-				params.put("gettersHandler", new ParamHandler<TestAttribute>() {
-					@Override
-					public void handle(TestAttribute attribute, Map<String, Object> params) {
-						params.put("attribute", attribute.getAttribute());
-						params.put("Attribute", capitalize(attribute.getAttribute()));
-						params.put("attributeType", attribute.getType());
-					}
-				});
-			}
-		});
 		
 		logStep("Generation du code");
 
